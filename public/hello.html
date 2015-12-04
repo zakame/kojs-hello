@@ -28,8 +28,8 @@
           <br/>
           <p>Full name: <strong data-bind="text: fullName"></strong></p>
           <br/>
-          <p>First name: <input name="" type="text" value="" data-bind="value: firstName"/></p>
-          <p>Last name: <input name="" type="text" value="" data-bind="value: lastName"/></p>
+          <p>First name: <input name="" type="text" value=""data-bind="value: firstName, valueUpdate: 'keyup'"/></p>
+          <p>Last name: <input name="" type="text" value="" data-bind="value: lastName, valueUpdate: 'keyup'"/></p>
           <br/>
           <p><button class="btn btn-raised btn-primary" data-bind="click: capitalizeLastName">Go caps</button></p>
         </div>
