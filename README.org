@@ -6,7 +6,7 @@ Just a simple run-through of [[http://knockoutjs.com][KnockoutJS]] as seen in it
 
 * Quick Start
 
-#+begin_src sh :exports none
+#+begin_src sh
 cpanm --installdeps .
 morbo kojs-demo.pl
 firefox http://localhost:3000/hello.html
