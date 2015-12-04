@@ -1,6 +1,9 @@
 /*global ko document $ Sammy location */
 
 $(document).ready(function() {
+
+    'use strict';
+
     function AppViewModel() {
         this.firstName = ko.observable("Zak");
         this.lastName = ko.observable("Elep");
@@ -76,7 +79,7 @@ $(document).ready(function() {
             location.hash = mail.folder + '/' + mail.id;
         };
 
-        Sammy(function() {
+        new Sammy(function() {
             this.get('#:folder', function() {
                 self.chosenFolderId(this.params.folder);
                 self.chosenMailData(null);
