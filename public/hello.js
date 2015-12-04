@@ -4,7 +4,7 @@ $(document).ready(function() {
     function AppViewModel() {
         this.firstName = ko.observable("Zak");
         this.lastName = ko.observable("Elep");
-        this.fullName = ko.computed(function () {
+        this.fullName = ko.computed(function() {
             return this.firstName() + " " + this.lastName();
         }, this);
 
@@ -28,11 +28,16 @@ $(document).ready(function() {
     function ReservationsViewModel() {
         var self = this;
 
-        self.availableMeals = [
-            { mealName: "Standard (sandwich)", price: 0 },
-            { mealName: "Premium (lobster)", price: 34.95 },
-            { mealName: "Ultimate (whole zebra)", price: 290 },
-        ];
+        self.availableMeals = [{
+            mealName: "Standard (sandwich)",
+            price: 0
+        }, {
+            mealName: "Premium (lobster)",
+            price: 34.95
+        }, {
+            mealName: "Ultimate (whole zebra)",
+            price: 290
+        }, ];
 
         self.seats = ko.observableArray([
             new SeatReservation("Zak", self.availableMeals[0]),
@@ -43,7 +48,9 @@ $(document).ready(function() {
             self.seats.push(new SeatReservation("", self.availableMeals[0]));
         };
 
-        self.removeSeat = function(seat) { self.seats.remove(seat); };
+        self.removeSeat = function(seat) {
+            self.seats.remove(seat);
+        };
 
         self.totalSurcharge = ko.computed(function() {
             var total = 0;
@@ -56,40 +63,57 @@ $(document).ready(function() {
     function WebmailViewModel() {
         var self = this;
 
-        self.folders = [ 'Inbox', 'Archive', 'Sent', 'Spam' ];
+        self.folders = ['Inbox', 'Archive', 'Sent', 'Spam'];
         self.chosenFolderId = ko.observable();
         self.chosenFolderData = ko.observable();
         self.chosenMailData = ko.observable();
 
-        self.goToFolder = function(folder) { location.hash = folder; };
+        self.goToFolder = function(folder) {
+            location.hash = folder;
+        };
 
-        self.goToMail = function(mail) { location.hash = mail.folder + '/' + mail.id; };
+        self.goToMail = function(mail) {
+            location.hash = mail.folder + '/' + mail.id;
+        };
 
         Sammy(function() {
             this.get('#:folder', function() {
                 self.chosenFolderId(this.params.folder);
                 self.chosenMailData(null);
-                $.get('/mail', { folder: this.params.folder }, self.chosenFolderData);
+                $.get('/mail', {
+                    folder: this.params.folder
+                }, self.chosenFolderData);
             });
 
             this.get('#:folder/:mailId', function() {
                 self.chosenFolderId(this.params.folder);
                 self.chosenFolderData(null);
-                $.get('/mail', { mailId: this.params.mailId }, self.chosenMailData);
+                $.get('/mail', {
+                    mailId: this.params.mailId
+                }, self.chosenMailData);
             });
 
-            this.get('', function() { this.app.runRoute('get', '#Inbox'); });
+            this.get('', function() {
+                this.app.runRoute('get', '#Inbox');
+            });
         }).run();
     }
 
-    function Answer(text) { this.answerText = text; this.points = ko.observable(1); }
+    function Answer(text) {
+        this.answerText = text;
+        this.points = ko.observable(1);
+    }
 
     function SurveyViewModel(question, pointsBudget, answers) {
         this.question = question;
         this.pointsBudget = pointsBudget;
-        this.answers = $.map(answers, function(text) { return new Answer(text); });
+        this.answers = $.map(answers, function(text) {
+            return new Answer(text);
+        });
 
-        this.save = function() { alert('TODO'); };
+        this.save = function() {
+            alert('TODO');
+        };
 
         this.pointsUsed = ko.computed(function() {
             var total = 0;
@@ -133,11 +157,15 @@ $(document).ready(function() {
 
             $('span', element).each(function(index) {
                 $(this).hover(
-                    function() { $(this).prevAll().add(this).addClass('hoverChosen'); },
-                    function() { $(this).prevAll().add(this).removeClass('hoverChosen'); }
+                    function() {
+                        $(this).prevAll().add(this).addClass('hoverChosen');
+                    },
+                    function() {
+                        $(this).prevAll().add(this).removeClass('hoverChosen');
+                    }
                 ).click(function() {
                     var observable = valueAccessor();
-                    observable(index+1);
+                    observable(index + 1);
                 });
             });
         },
