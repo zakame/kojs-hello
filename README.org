@@ -1,0 +1,13 @@
+#+TITLE: KnockoutJS Demo
+
+* About
+
+Just a simple run-through of [[http://knockoutjs.com][KnockoutJS]] as seen in its [[http://learn.knockoutjs.com][live tutorials]].
+
+* Quick Start
+
+#+begin_src sh :exports none
+cpanm --installdeps .
+morbo kojs-demo.pl
+firefox http://localhost:3000/hello.html
+#+end_src
