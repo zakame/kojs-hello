@@ -82,7 +82,7 @@ $(document).ready(function() {
         }).run();
     }
 
-    function Answer(text) { this.answerText = text; this.points = ko.observable(1); };
+    function Answer(text) { this.answerText = text; this.points = ko.observable(1); }
 
     function SurveyViewModel(question, pointsBudget, answers) {
         this.question = question;
@@ -97,7 +97,7 @@ $(document).ready(function() {
                 total += this.answers[i].points();
             return total;
         }, this);
-    };
+    }
 
     ko.bindingHandlers.fadeVisible = {
         init: function(element, valueAccessor) {
@@ -106,7 +106,12 @@ $(document).ready(function() {
         },
         update: function(element, valueAccessor) {
             var shouldDisplay = valueAccessor();
-            shouldDisplay ? $(element).fadeIn() : $(element).fadeOut();
+            if (shouldDisplay) {
+                $(element).fadeIn();
+            }
+            else {
+                $(element).fadeOut();
+            }
         }
     };
 
@@ -116,7 +121,7 @@ $(document).ready(function() {
         },
         update: function(element, valueAccessor) {
             var currentValue = valueAccessor();
-            $(element).button("option", "disabled", currentValue.enable == false);
+            $(element).button("option", "disabled", currentValue.enable === false);
         }
     };
 
@@ -128,8 +133,8 @@ $(document).ready(function() {
 
             $('span', element).each(function(index) {
                 $(this).hover(
-                    function() { $(this).prevAll().add(this).addClass('hoverChosen') },
-                    function() { $(this).prevAll().add(this).removeClass('hoverChosen') }
+                    function() { $(this).prevAll().add(this).addClass('hoverChosen'); },
+                    function() { $(this).prevAll().add(this).removeClass('hoverChosen'); }
                 ).click(function() {
                     var observable = valueAccessor();
                     observable(index+1);
