@@ -17,6 +17,8 @@ $(document).ready(function() {
         };
     }
 
+    ko.applyBindings(new AppViewModel(), document.getElementById('basics'));
+
     function SeatReservation(name, initialMeal) {
         var self = this;
         self.name = name;
@@ -63,6 +65,8 @@ $(document).ready(function() {
         });
     }
 
+    ko.applyBindings(new ReservationsViewModel(), document.getElementById('seats'));
+
     function WebmailViewModel() {
         var self = this;
 
@@ -101,6 +105,8 @@ $(document).ready(function() {
             });
         }).run();
     }
+
+    ko.applyBindings(new WebmailViewModel(), document.getElementById('spa'));
 
     function Answer(text) {
         this.answerText = text;
@@ -180,9 +186,6 @@ $(document).ready(function() {
         }
     };
 
-    ko.applyBindings(new AppViewModel(), document.getElementById('basics'));
-    ko.applyBindings(new ReservationsViewModel(), document.getElementById('seats'));
-    ko.applyBindings(new WebmailViewModel(), document.getElementById('spa'));
     ko.applyBindings(new SurveyViewModel(
         "Which factors affect your technology choices?", 10, [
             "Functionaliy, compatibility, pricing - all that boring stuff",
